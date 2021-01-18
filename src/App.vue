@@ -1,32 +1,46 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
+  <div>
+    <!--    <router-view></router-view> // 一级路由配置-->
+    <tabbar v-show="isTabbarShow"></tabbar>
+    <!-- 路由容器 -->
+    <section>
+      <router-view></router-view>
+    </section>
   </div>
 </template>
 
-<style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
+<script>
+import tabbar from './components/Tabbar'
+import { mapState } from 'vuex' // 映射状态
 
-#nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
+// ES6 导出模块
+export default {
+  data () {
+    return {
     }
+  },
+  components: {
+    tabbar
+  },
+  computed: {
+    ...mapState('TabbarModule', ['isTabbarShow'])
   }
 }
+</script>
+
+<style lang="scss">
+  *{
+    padding: 0;
+    margin: 0;
+    touch-action: none;
+  }
+  ul{
+    list-style-type: none;
+  }
+  section {
+    margin-bottom: 50px;
+  }
+  html, body{
+    height: 100%;
+  }
 </style>
